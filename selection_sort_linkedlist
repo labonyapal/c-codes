@@ -1,1 +1,73 @@
 
+#include <bits/stdc++.h>
+using namespace std;
+
+struct ll {
+    struct node {
+        node* next;
+        int val;
+    };
+
+    node* head = NULL;
+    node* tail = NULL;
+
+    void insert_first(int x) {
+        node* a = (node*)malloc(sizeof(node));
+        a->val = x;
+        a->next = head;
+        head = a;
+        if (tail == NULL) {
+            tail = a;
+        }
+    }
+
+    void print() {
+        node* b = head;
+        while (b) {
+            cout << b->val << " ";
+            b = b->next;
+        }
+        cout << endl;
+    }
+
+    void selection_sort() {
+        // Temporary pointers
+        node *tempHead = head, *tempTail = NULL;
+
+        // Traverse the whole linked list
+        while (tempHead != NULL) {
+            node *min = tempHead;
+            node *r = tempHead->next;
+
+            // Traverse the unsorted sublist
+            while (r != NULL) {
+                if (min->val > r->val) {
+                    min = r;
+                }
+                r = r->next;
+            }
+
+            // Swap data of tempHead and min
+            int x = tempHead->val;
+            tempHead->val = min->val;
+            min->val = x;
+
+            // Update pointers
+            tempTail = tempHead;
+            tempHead = tempHead->next;
+        }
+    }
+};
+
+int main() {
+    ll pak;
+    int n, i, num;
+    cin >> n;
+    for (i = 0; i < n; i++) {
+        cin >> num;
+        pak.insert_first(num);
+    }
+    pak.selection_sort();
+    pak.print();
+    return 0;
+}
