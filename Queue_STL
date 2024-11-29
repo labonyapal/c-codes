@@ -1,1 +1,22 @@
+//queue with standard library
 
+#include <iostream>
+#include <queue> // Include the stack header
+
+using namespace std;
+
+int main(){
+    int n, num;
+    cin >> n; // Read the number of elements
+    queue<int> st;
+    for(int i = 0; i < n; i++){
+        cin >> num;
+        st.push(num);
+    }
+
+    while(!st.empty()){
+        cout << st.front() << " "; // Print the top element
+        st.pop(); // Remove the top element
+    }
+    return 0;
+}
