@@ -1,1 +1,16 @@
+//input 123456
+//output 654321
+#include<bits/stdc++.h>
+using namespace std;
 
+int main()
+{
+    int n, rev, s=0, sum=0;
+    cin>>n;
+    while(n>0){
+        rev=n%10;
+        sum=sum*10+rev;
+        n/=10;
+    }
+    cout<<sum;
+}
