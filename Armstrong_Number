@@ -1,0 +1,22 @@
+//371 is armstrong 123 is not
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n, rev, s=0, sum=0;
+    cin>>n;
+    int temp=n;
+    while(n>0){
+        rev=n%10;
+        sum=sum+rev*rev*rev;
+        n/=10;
+    }
+    if(temp==sum){
+        cout<<"Armstrong Number"<<endl;
+    }
+    else{
+        cout<<"NOt Armstrong Number"<<endl;
+    }
+}
