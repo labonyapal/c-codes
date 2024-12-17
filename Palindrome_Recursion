@@ -1,0 +1,28 @@
+//this code will check palindrome with recursion
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void f(int l, int r, string a)
+{
+    if(l>=r)
+    {
+        cout<<"Yes"<<endl;
+        return;
+    }
+    if(a[l]!=a[r])
+    {
+        cout<<"NO"<<endl;
+        return;
+    }
+    f(l+1, r-1, a);
+}
+
+int main()
+{
+    int n;
+    string s;
+    cin>>s;
+    n=s.length();
+    f(0, n-1, s);
+}
