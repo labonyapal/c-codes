@@ -1,0 +1,27 @@
+//reversing array with recursion
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void f(int l, int r, vector<int> &a)
+{
+    if(l>=r){
+            for(int i=0; i<a.size(); i++){
+    cout<<a[i]<<" ";
+  }
+        return;
+    }
+    swap(a[l], a[r]);
+    f(l+1, r-1, a);
+}
+
+int main()
+{
+  int n;
+  cin>>n;
+  vector<int> arr(n);
+  for(int i=0; i<n; i++){
+    cin>>arr[i];
+  }
+   f(0, n-1, arr);
+}
