@@ -1,0 +1,33 @@
+//finding second largest from an array
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int second_largest(vector<int> a, int n)
+{
+    int largest;
+    int slargest;
+    largest=a[0];
+    slargest=-1;// only for array having non negative integer
+    for(int i=0; i<n; i++){
+        if(a[i]>largest){
+            slargest=largest;
+            largest=a[i];
+        }
+        else if(a[i]>slargest && a[i]<largest){
+            slargest=a[i];
+        }
+    }
+    return slargest;
+}
+
+int main(){
+int n, i, num;
+cin>>n;
+vector<int> a(n);
+for( i=0; i<n; i++)
+{
+    cin >> a[i];
+}
+cout << second_largest(a, n) <<endl;
+}
