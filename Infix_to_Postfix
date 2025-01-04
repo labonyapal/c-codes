@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int prec(char c) {
+    if (c == '^') return 3;
+    else if (c == '/' || c == '*') return 2;
+    else if (c == '+' || c == '-') return 1;
+    else return -1;
+}
+
+void info(string s) {
+    stack<char> stk;
+    string res;
+
+    for (int i = 0; i < s.length(); i++) {
+        char c = s[i];
+
+        // Check if the character is an operand (letters/numbers)
+        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+            res += c;
+        }
+        // If the character is '(', push it to the stack
+        else if (c == '(') {
+            stk.push(c);
+        }
+        // If the character is ')', pop from the stack until '(' is found
+        else if (c == ')') {
+            while (!stk.empty() && stk.top() != '(') {
+                res += stk.top();
+                stk.pop();
+            }
+            stk.pop(); // Pop '(' from the stack
+        }
+        // If the character is an operator
+        else {
+            while (!stk.empty() && prec(c) <= prec(stk.top())) {
+                res += stk.top();
+                stk.pop();
+            }
+            stk.push(c);
+        }
+    }
+
+    // Pop all the operators left in the stack
+    while (!stk.empty()) {
+        res += stk.top();
+        stk.pop();
+    }
+
+    cout << res << endl; // Output the result
+}
+
+int main() {
+    string exp = "a*b+c*(d-e+f)";
+    info(exp);
+    return 0;
+}
