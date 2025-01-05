@@ -1,0 +1,109 @@
+//doubly llinked list all
+
+//insertion with linked list
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct ll {
+    struct node {
+        node *prev;
+        node* next;
+        int val;
+    };
+
+    node* head = NULL;
+    node* tail = NULL;
+
+    void insert_first(int x) {
+        node* a = (node*)malloc(sizeof(node));
+        a->val = x;
+        a->next = NULL;
+        a->prev=NULL;
+
+        if (head == NULL) {
+                head=a;
+            tail = a;
+        }
+        else{
+            a->next=head;
+            head->prev=a;
+            head=head->prev;
+        }
+    }
+
+         void insert_last(int x) {
+        node* a = (node*)malloc(sizeof(node));
+        a->val = x;
+        a->next = NULL;
+        a->prev=NULL;
+
+        if (head == NULL) {
+                head=a;
+            tail = a;
+        }
+        else{
+            a->prev=tail;
+            tail->next=a;
+            tail=tail->next;
+        }
+    }
+
+    int delete_first(){
+    if(head==NULL)return-1;
+    else if(head==tail){
+        int x=head->val;
+        head=NULL;
+        tail=NULL;
+        return x;
+    }
+    else{
+        int x=head->val;
+        head=head->next;
+        head->prev=NULL;
+        return x;
+    }
+
+    }
+
+      int delete_last(){
+    if(head==NULL)return-1;
+    else if(head==tail){
+        int x=head->val;
+        head=NULL;
+        tail=NULL;
+        return x;
+    }
+    else{
+        int x=tail->val;
+        tail=tail->prev;
+        tail->next=NULL;
+        return x;
+    }
+
+    }
+
+    void print() {
+        node* b = head;
+        while (b) {
+            cout << b->val << " ";
+            b = b->next;
+        }
+        cout << endl;
+    }
+
+
+};
+
+int main() {
+    ll pak;
+    int n, i, num;
+    cin >> n;
+    for (i = 0; i < n; i++) {
+        cin >> num;
+        pak.insert_last(num);
+    }
+    pak.delete_last();
+    pak.print();
+    return 0;
+}
