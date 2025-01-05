@@ -1,0 +1,60 @@
+//insertion with linked list
+
+#include <bits/stdc++.h>
+using namespace std;
+const int mx=1000;
+int s[mx];
+int top=-1;
+
+bool pu(int x)
+{
+    if(top>=(mx-1)){
+        cout<<"Overflow"<<endl;
+        return false;
+    }
+    else{
+        s[++top]=x;
+        return true;
+    }
+}
+
+int po(){
+if(top<0){
+    cout<<"Underflow"<<endl;
+    return -1;
+}
+else{
+    int t=s[top--];
+    return t;
+}
+}
+int peak(){
+if(top<0){
+    cout<<"Underflow"<<endl;
+    return -1;
+}
+else{
+    return s[top];
+}
+}
+
+bool isempty(){
+return (top<0);
+}
+
+int main(){
+int t, a, b, c, num;
+cin>>t;
+while(t--)
+{
+    cin>>a;
+    if(a==1){
+        cin>>num;
+        pu(num);
+    }
+    else if(a==2)po();
+    else if(a==3){
+        cout<<peak()<<endl;
+    }
+}
+}
