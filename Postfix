@@ -1,0 +1,50 @@
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int per(int op1, int op2, int opera)
+{
+    switch(opera)
+    {
+    case '+':
+        return op1+op2;
+        break;
+    case '-':
+        return op1-op2;
+        break;
+    case '*':
+        return op1*op2;
+        break;
+    case '/':
+        return op1/op2;
+        break;
+    default:
+        return 0;
+    }
+}
+int exe(string &exp)
+{
+    stack<int> st;
+    for(char c: exp){
+        if(isdigit(c)){
+            st.push(c-'0');
+        }
+        else{
+            int op2=st.top();
+            st.pop();
+            int op1=st.top();
+            st.pop();
+            int res=per(op1, op2, c);
+            st.push(res);
+        }
+    }
+    return st.top();
+}
+
+int main()
+{
+    string s;
+    cin>>s;
+    cout<<exe(s)<<endl;
+}
