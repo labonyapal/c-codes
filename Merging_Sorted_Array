@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void merge(int a[], int b[], int m, int n )
+{
+    int c[100000], i=0, j=0, k=0;
+    while(i<m &&j<n){
+    if(a[i]<=b[j]){
+        c[k]=a[i];
+        k++;
+        i++;
+    }
+    else{
+        c[k]=b[j];
+        k++;
+        j++;
+    }
+    }
+    while(i<m){
+        c[k]=a[i];
+        k++;
+        i++;
+    }
+    while(j<n){
+         c[k]=b[j];
+        k++;
+        j++;
+    }
+
+    for(int p=0 ; p<n+m; p++){
+        cout<<c[p]<<" ";
+    }
+
+}
+
+int main()
+{
+    int n, m, i, j;
+    cin>>m>>n;
+    int a[m], b[n];
+    for(i=0; i<m; i++)
+    {
+        cin>>a[i];
+    }
+    for(j=0; j<n; j++)
+    {
+        cin>>b[j];
+    }
+     merge(a, b, m, n);
+}
