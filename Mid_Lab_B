@@ -80,7 +80,7 @@ int main() {
     cin >> n;
 
     // Construct the tree
-    Node *root = Tree(r, n);
+    node *root = Tree(r, n);
 
     // Print the tree in the custom order
     halum(root);
