@@ -3,41 +3,46 @@
 using namespace std;
 
 // Node structure for the ternary tree
-struct Node {
+struct node {
     int data;       // Value of the node
-    Node *left;     // Pointer to the left child
-    Node *mid;      // Pointer to the middle child
-    Node *right;    // Pointer to the right child
+    node *left;     // Pointer to the left child
+    node *mid;      // Pointer to the middle child
+    node *right;    // Pointer to the right child
 
     // Constructor to initialize the node
-    Node(int d) : data(d), left(nullptr), mid(nullptr), right(nullptr) {}
+     node(int v){
+     data=v;
+     left=NULL;
+     mid=NULL;
+     right=NULL;
+     }
 };
 
 // Function to perform the custom traversal
-void customOrderTraversal(Node *root) {
+void halum(node *root) {
     if (!root) return;
 
     // Traverse the left sub-tree
-    customOrderTraversal(root->left);
+    halum(root->left);
 
     // Traverse the mid sub-tree
-    customOrderTraversal(root->mid);
+    halum(root->mid);
 
     // Print the current node value
     cout << root->data << " ";
 
     // Traverse the right sub-tree
-    customOrderTraversal(root->right);
+    halum(root->right);
 }
 
 // Function to construct the ternary tree
-Node* constructTree(int rootValue, int n) {
+node* Tree(int rootValue, int n) {
     // Create the root node
-    Node *root = new Node(rootValue);
+    node *root = new node(rootValue);
 
     // Map to store nodes for quick access
-    unordered_map<int, Node *> nodes;
-    nodes[rootValue] = root;
+    unordered_map<int, node *> billu;
+    billu[rootValue] = root;
 
     // Perform the operations
     for (int i = 0; i < n; ++i) {
@@ -45,10 +50,10 @@ Node* constructTree(int rootValue, int n) {
         cin >> op >> key >> val;
 
         // Find the node with the value 'key'
-        if (nodes.find(key) != nodes.end()) {
-            Node *parent = nodes[key];
-            Node *child = new Node(val); // Create the child node
-            nodes[val] = child;          // Add child to the map
+        if (billu.find(key) != billu.end()) {
+            node *parent = billu[key];
+            node *child = new node(val); // Create the child node
+            billu[val] = child;          // Add child to the map
 
             // Set the appropriate child pointer based on op
             if (op == 0) {
@@ -75,10 +80,10 @@ int main() {
     cin >> n;
 
     // Construct the tree
-    Node *root = constructTree(r, n);
+    Node *root = Tree(r, n);
 
     // Print the tree in the custom order
-    customOrderTraversal(root);
+    halum(root);
     cout << endl;
 
     return 0;
