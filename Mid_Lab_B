@@ -30,22 +30,14 @@ void customOrderTraversal(Node *root) {
     customOrderTraversal(root->right);
 }
 
-// Main function
-int main() {
-    // Read the root value
-    int r;
-    cin >> r;
-
+// Function to construct the ternary tree
+Node* constructTree(int rootValue, int n) {
     // Create the root node
-    Node *root = new Node(r);
+    Node *root = new Node(rootValue);
 
     // Map to store nodes for quick access
     unordered_map<int, Node *> nodes;
-    nodes[r] = root;
-
-    // Read the number of operations
-    int n;
-    cin >> n;
+    nodes[rootValue] = root;
 
     // Perform the operations
     for (int i = 0; i < n; ++i) {
@@ -68,6 +60,22 @@ int main() {
             }
         }
     }
+
+    return root;
+}
+
+// Main function
+int main() {
+    // Read the root value
+    int r;
+    cin >> r;
+
+    // Read the number of operations
+    int n;
+    cin >> n;
+
+    // Construct the tree
+    Node *root = constructTree(r, n);
 
     // Print the tree in the custom order
     customOrderTraversal(root);
