@@ -1,0 +1,89 @@
+
+
+#include <bits/stdc++.h>
+using namespace std;
+void merges(vector<int> &arr, int left, int mid, int right)
+{
+
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    int i, j, k;
+
+  vector<int> L(n1), R(n2);
+
+    // copy values
+
+
+    for ( i = 0; i < n1; i++)
+    {
+        L[i] = arr[left+i];
+    }
+    for ( j = 0; j < n2; j++)
+    {
+        R[j] = arr[mid+1+j];
+    }
+
+    // merge two sorted arrays
+     i = 0;
+    j = 0;
+    k = left;
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k++] = L[i++];
+        }
+        else
+        {
+            arr[k++] = R[j++];
+        }
+    }
+    while (i < n1)
+    {
+        arr[k++] = L[i++];
+    }
+    while (j < n2)
+    {
+        arr[k++] = R[j++];
+    }
+    //delete[] first;
+   // delete[] second;
+}
+void mergesort(vector<int> &arr, int s, int e)
+{
+
+    // base case
+    if (s >= e)
+    {
+        return;
+    }
+    int mid = (s + e) / 2;
+    // left part sort
+    mergesort(arr, s, mid);
+
+    // right part sort
+
+    mergesort(arr, mid + 1, e);
+
+
+    merges(arr, s,mid, e);
+
+}
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    mergesort(arr, 0, n - 1);
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
