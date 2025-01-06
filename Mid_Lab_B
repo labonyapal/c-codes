@@ -1,0 +1,77 @@
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+// Node structure for the ternary tree
+struct Node {
+    int data;       // Value of the node
+    Node *left;     // Pointer to the left child
+    Node *mid;      // Pointer to the middle child
+    Node *right;    // Pointer to the right child
+
+    // Constructor to initialize the node
+    Node(int d) : data(d), left(nullptr), mid(nullptr), right(nullptr) {}
+};
+
+// Function to perform the custom traversal
+void customOrderTraversal(Node *root) {
+    if (!root) return;
+
+    // Traverse the left sub-tree
+    customOrderTraversal(root->left);
+
+    // Traverse the mid sub-tree
+    customOrderTraversal(root->mid);
+
+    // Print the current node value
+    cout << root->data << " ";
+
+    // Traverse the right sub-tree
+    customOrderTraversal(root->right);
+}
+
+// Main function
+int main() {
+    // Read the root value
+    int r;
+    cin >> r;
+
+    // Create the root node
+    Node *root = new Node(r);
+
+    // Map to store nodes for quick access
+    unordered_map<int, Node *> nodes;
+    nodes[r] = root;
+
+    // Read the number of operations
+    int n;
+    cin >> n;
+
+    // Perform the operations
+    for (int i = 0; i < n; ++i) {
+        int op, key, val;
+        cin >> op >> key >> val;
+
+        // Find the node with the value 'key'
+        if (nodes.find(key) != nodes.end()) {
+            Node *parent = nodes[key];
+            Node *child = new Node(val); // Create the child node
+            nodes[val] = child;          // Add child to the map
+
+            // Set the appropriate child pointer based on op
+            if (op == 0) {
+                parent->left = child;
+            } else if (op == 1) {
+                parent->mid = child;
+            } else if (op == 2) {
+                parent->right = child;
+            }
+        }
+    }
+
+    // Print the tree in the custom order
+    customOrderTraversal(root);
+    cout << endl;
+
+    return 0;
+}
