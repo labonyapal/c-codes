@@ -1,0 +1,84 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct ll {
+    struct node {
+        int data;
+        node *next;
+    };
+
+    node *head = NULL;
+    node *tail = NULL;
+
+    void insert(int data) {
+        node *temp = new node;
+        temp->data = data;
+        temp->next = NULL;
+
+        if (head == NULL) {
+            head = temp;
+            tail = temp;
+        } else {
+            tail->next = temp;
+            tail = temp;
+        }
+    }
+
+    void display() {
+        node *temp = head;
+        while (temp != NULL) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+    }
+};
+
+int main() {
+    int n;
+    cin >> n;  // number of linked lists
+
+    vector<ll> lists(n);
+
+    // Input each linked list
+    for (int i = 0; i < n; i++) {
+        int m;
+        cin >> m;  // number of elements in the i-th linked list
+        for (int j = 0; j < m; j++) {
+            int x;
+            cin >> x;
+            lists[i].insert(x);
+        }
+    }
+
+    ll mergedList;
+
+    // Priority queue to store the node pointers and make sure the smallest element is always at the top
+    priority_queue<pair<int, ll::node*>, vector<pair<int, ll::node*>>, greater<pair<int, ll::node*>>> pq;
+
+    // Insert the head node of each list into the priority queue
+    for (int i = 0; i < n; i++) {
+        if (lists[i].head != NULL) {
+            pq.push({lists[i].head->data, lists[i].head});
+        }
+    }
+
+    // Merge all lists
+    while (!pq.empty()) {
+        auto top = pq.top();
+        pq.pop();
+
+        // Insert the smallest element from the heap to the merged list
+        mergedList.insert(top.first);
+
+        // Move to the next node in the list from which the smallest element was taken
+        ll::node* nextNode = top.second->next;
+        if (nextNode != NULL) {
+            pq.push({nextNode->data, nextNode});
+        }
+    }
+
+    // Display the merged list
+    mergedList.display();
+
+    return 0;
+}
