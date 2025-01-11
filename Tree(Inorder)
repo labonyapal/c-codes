@@ -1,6 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Create a Binary Tree
+
+/*        1
+        /   \
+       3     5
+      / \    / \
+     7  11  17  NULL
+*/
+
 // Node structure to represent each node in the binary tree
 struct node {
     int num;       // Data stored in the node
