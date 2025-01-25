@@ -1,0 +1,13 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+int n, u, v, i, m;
+cin>>n>>m;
+int a[n+1][n+1]
+for(i=1; i<=m; i++ ){
+    cin>>u>>v;
+    a[u][v]=1;
+    a[v][u]=1;
+}
+}
